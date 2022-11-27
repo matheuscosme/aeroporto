@@ -3,50 +3,47 @@ public class Pista {
     private int decolados;
     private int pousados;
 
-    public Pista(){
+    public Pista() {
         this.livre = true;
         this.pousados = 0;
         this.decolados = 0;
     }
 
-    public void pouso(){
-        if(this.livre){
+    public void pouso() {
+        if (this.livre) {
             this.livre = false;
             this.pousados++;
-        }
-        else{
+        } else {
             System.out.println("Pista Ocupada!");
         }
     }
 
-    public void decolagem(){
-        if(this.livre){
+    public void decolagem() {
+        if (this.livre) {
             this.livre = false;
             this.decolados++;
-        }
-        else{
+        } else {
             System.out.println("Pista Ocupada!");
         }
     }
 
-    public void liberarPista(){
-        if(!this.livre){
+    public void liberarPista() {
+        if (!this.livre) {
             this.livre = true;
-        }
-        else{
+        } else {
             System.out.println("Pista já Liberada!");
         }
     }
 
-    public boolean pistaLiberada(){
+    public boolean pistaLiberada() {
         return this.livre;
     }
 
-    public int getPousados(){
+    public int getPousados() {
         return this.pousados;
     }
 
-    public int getDecolados(){
+    public int getDecolados() {
         return this.decolados;
     }
 }
