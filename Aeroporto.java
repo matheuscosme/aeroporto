@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Aeroporto {
@@ -11,6 +12,8 @@ public class Aeroporto {
     Fila filaDecolagem1;
     int idAviaoImpares = 1;
     int idAviaoPares = 0;
+    ArrayList<No> avioesAterrissagem;
+    ArrayList<No> avioesDecolagem;
 
     public Aeroporto() {
         this.pista1 = new Pista();
@@ -21,6 +24,8 @@ public class Aeroporto {
         this.filaAterrissagem3 = new Fila(pista2);
         this.filaAterrissagem4 = new Fila(pista2);
         this.filaDecolagem1 = new Fila(pista3);
+        this.avioesAterrissagem = new ArrayList<No>();
+        this.avioesDecolagem = new ArrayList<No>();
     }
 
     public void verFilas() {
@@ -61,7 +66,7 @@ public class Aeroporto {
         
         for (int i = 0; i < quantidadeAvioesAterrissar; i++) {
             int combustivel = random.nextInt(19) + 1;
-           
+
             Aviao aviao = new Aviao(idAviaoPares, combustivel);
             this.idAviaoPares = this.idAviaoPares + 2;
 
@@ -113,16 +118,16 @@ public class Aeroporto {
             //retirar
             if (this.filaAterrissagem1.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem1.colocarAviaoFrente();
-                this.filaAterrissagem1.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem1.removerInicio());
             } else if (this.filaAterrissagem2.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem2.colocarAviaoFrente();
-                this.filaAterrissagem2.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem2.removerInicio());
             } else if (this.filaAterrissagem3.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem3.colocarAviaoFrente();
-                this.filaAterrissagem3.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem3.removerInicio());
             } else if (this.filaAterrissagem4.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem4.colocarAviaoFrente();
-                this.filaAterrissagem4.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem4.removerInicio());
             }
             //ocupar a pista 3 com esse avião descendo
             this.pista3.pouso();
@@ -134,23 +139,23 @@ public class Aeroporto {
             int pistaOcupar = 0;
             if (this.filaAterrissagem1.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem1.colocarAviaoFrente();
-                this.filaAterrissagem1.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem1.removerInicio());
             }
             if (this.filaAterrissagem2.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem2.colocarAviaoFrente();
-                this.filaAterrissagem2.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem2.removerInicio());
                 pistaOcupar = 1;
             }
             if (this.filaAterrissagem3.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem3.colocarAviaoFrente();
-                this.filaAterrissagem3.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem3.removerInicio());
                 if (pistaOcupar == 0){
                     pistaOcupar = 2;
                 }
             }  
             if (this.filaAterrissagem4.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem4.colocarAviaoFrente();
-                this.filaAterrissagem4.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem4.removerInicio());
                 pistaOcupar = 2;
             }
             //ocupar a pista 3 com esse avião descendo
@@ -168,19 +173,19 @@ public class Aeroporto {
             //retirar
             if (this.filaAterrissagem1.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem1.colocarAviaoFrente();
-                this.filaAterrissagem1.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem1.removerInicio());
             }
             if (this.filaAterrissagem2.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem2.colocarAviaoFrente();
-                this.filaAterrissagem2.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem2.removerInicio());
             }
             if (this.filaAterrissagem3.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem3.colocarAviaoFrente();
-                this.filaAterrissagem3.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem3.removerInicio());
             }  
             if (this.filaAterrissagem4.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem4.colocarAviaoFrente();
-                this.filaAterrissagem4.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem4.removerInicio());
             }
             //ocupar todas as pistas 
             this.pista3.pouso();
@@ -195,9 +200,9 @@ public class Aeroporto {
         if (this.pista1.getLivre()){
             //ver qual fila dela tem mais aviões para retirar
             if (this.filaAterrissagem1.quantidadeAvioes >= this.filaAterrissagem2.quantidadeAvioes){
-                this.filaAterrissagem1.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem1.removerInicio());
             } else {
-                this.filaAterrissagem2.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem2.removerInicio());
             }
             //ocupar a pista
             this.pista1.pouso();
@@ -207,9 +212,10 @@ public class Aeroporto {
 
         if (this.pista2.getLivre()){
             if (this.filaAterrissagem3.quantidadeAvioes >= this.filaAterrissagem4.quantidadeAvioes){
-                this.filaAterrissagem3.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem3.removerInicio());
+
             } else {
-                this.filaAterrissagem4.removerInicio();
+                this.avioesAterrissagem.add(this.filaAterrissagem4.removerInicio());
             }
             this.pista2.pouso();
         } else {
@@ -220,12 +226,30 @@ public class Aeroporto {
     public void decolagem() {
         //verificar se a pista está livre
         if (this.pista3.getLivre()){
-            this.filaDecolagem1.removerInicio();
+            this.avioesDecolagem.add(this.filaDecolagem1.removerInicio());
             this.pista3.decolagem();
         }
     }
 
-    public void passarTempo() {
+    public void printArraylistDecolagem(){
+        System.out.println("Tamanho fila decolagem: " + this.avioesDecolagem.size());
+        for (int i = 0; i < this.avioesDecolagem.size() ; i++){
+            System.out.printf("%d %s",this.avioesDecolagem.get(i).aviao.id , " ");
+        }
+        System.out.println(" ");
+    }
 
+    public void passarTempo()throws ErroMuitosAvioesEmergencia {
+        this.diminuirCombustivelAumentarTempoEspera();
+        this.adicionarNovosAvioesFila();
+        System.out.println("Número de aviões que aterrissam sem reserva de combustível: " + this.checarEmergencia());
+        this.pousoEmergencia();
+        this.pouso();
+        this.decolagem();
+        this.pista1.liberarPista();
+        this.pista2.liberarPista();
+        this.pista3.liberarPista();
+        this.verFilas();
+        this.printArraylistDecolagem();
     }
 }
