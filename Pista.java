@@ -35,7 +35,7 @@ public class Pista {
         }
     }
 
-    public boolean pistaLiberada() {
+    public boolean getLivre() {
         return this.livre;
     }
 

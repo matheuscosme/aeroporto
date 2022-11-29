@@ -74,7 +74,8 @@ public class Fila {
         }
         return quantidadeAvioesPoucoCombustivel;
     }
-
+    
+    //usado pra colocar o avião na frente da fila
     public void adicionarInicio(Aviao aviao) {
         this.adicionarFinal(aviao);
         for (int i = 0; i < this.quantidadeAvioes - 1; i++) {
