@@ -29,7 +29,7 @@ public class Aeroporto {
     }
 
     public void verFilas() {
-        System.out.println("***********");
+        System.out.println("***");
         System.out.println("Fila Aterrissagem 1 (Pista 1): ");
         filaAterrissagem1.printFila();
         System.out.println("Fila Aterrissagem 2 (Pista 1): ");
@@ -40,15 +40,15 @@ public class Aeroporto {
         filaAterrissagem4.printFila();
         System.out.println("Fila Decolagem 1 (Pista 3): ");
         filaDecolagem1.printFila();
-        System.out.println("***********");
+        System.out.println("***");
     }
 
     public void verPista() {
-        System.out.println("***********");
+        System.out.println("**");
         System.out.println("Pista 1 tá livre: " + this.pista1.getLivre());
         System.out.println("Pista 2 tá livre: " + this.pista2.getLivre());
         System.out.println("Pista 3 tá livre: " + this.pista3.getLivre());
-        System.out.println("***********");
+        System.out.println("**");
     }
 
     public void diminuirCombustivelAumentarTempoEspera() {
@@ -63,7 +63,7 @@ public class Aeroporto {
         // adicionar na fila aterrissagem
         Random random = new Random();
         int quantidadeAvioesAterrissar = random.nextInt(2) + 1;
-        
+        System.out.println("Foram adicionados " + quantidadeAvioesAterrissar + " aviões nas filas de aterrissagem");
         for (int i = 0; i < quantidadeAvioesAterrissar; i++) {
             int combustivel = random.nextInt(19) + 1;
 
@@ -92,6 +92,7 @@ public class Aeroporto {
         }
         // adicionar fila decolagem
         int quantidadeAvioesDecolar = random.nextInt(2) + 1;
+        System.out.println("Foram adicionados " + quantidadeAvioesDecolar + " aviões na fila de decolagem");
         for (int i = 0; i < quantidadeAvioesDecolar; i++) {
             Aviao aviao = new Aviao(idAviaoImpares, 20);
             this.idAviaoImpares = this.idAviaoImpares + 2;
@@ -206,9 +207,7 @@ public class Aeroporto {
             }
             //ocupar a pista
             this.pista1.pouso();
-        } else {
-            System.out.println("pista 1 ocupada, não vai ter outro pouso");
-        }
+        } 
 
         if (this.pista2.getLivre()){
             if (this.filaAterrissagem3.quantidadeAvioes >= this.filaAterrissagem4.quantidadeAvioes){
@@ -218,9 +217,7 @@ public class Aeroporto {
                 this.avioesAterrissagem.add(this.filaAterrissagem4.removerInicio());
             }
             this.pista2.pouso();
-        } else {
-            System.out.println("pista 2 ocupada, não vai ter outro pouso");
-        }
+        } 
     }
 
     public void decolagem() {
@@ -239,7 +236,36 @@ public class Aeroporto {
         System.out.println(" ");
     }
 
+    public void tempoEsperaDecolagem(){
+        if (this.avioesDecolagem.size() > 0){
+            System.out.print("Tempo de espera médio da decolagem: ");
+            System.out.println(this.avioesDecolagem.get(0).aviao.tempoEspera );
+        }
+        this.avioesDecolagem.clear();
+    }
+
+    public void tempoEsperaAterrissagem(){
+        if (this.avioesAterrissagem.size() > 0){
+            System.out.print("Tempo de espera médio da aterrisagem: ");
+            if (this.avioesAterrissagem.size() == 1){
+                System.out.println(this.avioesAterrissagem.get(0).aviao.tempoEspera );
+            } else if (this.avioesAterrissagem.size() == 2){
+                // System.out.println(this.avioesAterrissagem.get(0).aviao.tempoEspera);
+                // System.out.println(this.avioesAterrissagem.get(1).aviao.tempoEspera);
+                // float total = (this.avioesAterrissagem.get(0).aviao.tempoEspera + this.avioesAterrissagem.get(1).aviao.tempoEspera)/2;
+                // System.out.println(total);
+            } else if (this.avioesAterrissagem.size() == 3){
+                // float total = (this.avioesAterrissagem.get(0).aviao.tempoEspera + this.avioesAterrissagem.get(1).aviao.tempoEspera +this.avioesAterrissagem.get(2).aviao.tempoEspera )/3;
+                // System.out.println(total);
+            }
+            System.out.println();
+            this.avioesAterrissagem.clear();
+        }
+    }
+
     public void passarTempo()throws ErroMuitosAvioesEmergencia {
+        System.out.println();
+        System.out.println("**** Início Unidade de Tempo ****");
         this.diminuirCombustivelAumentarTempoEspera();
         this.adicionarNovosAvioesFila();
         System.out.println("Número de aviões que aterrissam sem reserva de combustível: " + this.checarEmergencia());
@@ -250,6 +276,10 @@ public class Aeroporto {
         this.pista2.liberarPista();
         this.pista3.liberarPista();
         this.verFilas();
-        this.printArraylistDecolagem();
+        this.tempoEsperaDecolagem();
+        this.tempoEsperaAterrissagem();
+        System.out.println("***** Fim Unidade de Tempo *****");
+        System.out.println();
+
     }
 }

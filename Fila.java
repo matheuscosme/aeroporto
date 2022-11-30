@@ -34,7 +34,8 @@ public class Fila {
     public No removerInicio() {
         No removido = null;
         if (filaVazia()) {
-            System.out.println("Fila vazia");
+            System.out.println(" ");
+            //fila vazia
         } else {
             removido = this.inicio_fila;
             this.inicio_fila = inicio_fila.proximoNo;
