@@ -240,6 +240,8 @@ public class Aeroporto {
         if (this.avioesDecolagem.size() > 0){
             System.out.print("Tempo de espera médio da decolagem: ");
             System.out.println(this.avioesDecolagem.get(0).aviao.tempoEspera );
+        } else {
+            System.out.println("Tempo de espera médio da decolagem: - ");
         }
         this.avioesDecolagem.clear();
     }
@@ -249,18 +251,13 @@ public class Aeroporto {
             System.out.print("Tempo de espera médio da aterrisagem: ");
             if (this.avioesAterrissagem.size() == 1){
                 System.out.println(this.avioesAterrissagem.get(0).aviao.tempoEspera );
-            } else if (this.avioesAterrissagem.size() == 2){
-                // System.out.println(this.avioesAterrissagem.get(0).aviao.tempoEspera);
-                // System.out.println(this.avioesAterrissagem.get(1).aviao.tempoEspera);
-                // float total = (this.avioesAterrissagem.get(0).aviao.tempoEspera + this.avioesAterrissagem.get(1).aviao.tempoEspera)/2;
-                // System.out.println(total);
-            } else if (this.avioesAterrissagem.size() == 3){
-                // float total = (this.avioesAterrissagem.get(0).aviao.tempoEspera + this.avioesAterrissagem.get(1).aviao.tempoEspera +this.avioesAterrissagem.get(2).aviao.tempoEspera )/3;
-                // System.out.println(total);
-            }
+            } 
+            //FALTA LÓGICA
             System.out.println();
-            this.avioesAterrissagem.clear();
+        } else {
+            System.out.println("Tempo de espera médio da aterrisagem: - ");
         }
+        this.avioesAterrissagem.clear();
     }
 
     public void passarTempo()throws ErroMuitosAvioesEmergencia {
@@ -275,6 +272,8 @@ public class Aeroporto {
         this.pista1.liberarPista();
         this.pista2.liberarPista();
         this.pista3.liberarPista();
+        System.out.println("Número de aviões que aterrissaram: " + this.avioesAterrissagem.size());
+        System.out.println("Número de aviões que decolaram: " + this.avioesDecolagem.size());
         this.verFilas();
         this.tempoEsperaDecolagem();
         this.tempoEsperaAterrissagem();
