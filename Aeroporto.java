@@ -137,6 +137,14 @@ public class Aeroporto {
             //colocar ele na frente
             //retirar
             //verificar que pista ocupar
+
+            //*************
+            //OBSERVAÇÃO
+            //nesse caso devemos observar se 2 avioes com pouco combustivel estao na mesma pista
+            //por isso tem que fazer um FOR com a quantidade resultante de verificarTemAviaoComPoucoCombustivel()
+            //isso deve ser feito em CADA pista
+            //*************
+
             int pistaOcupar = 0;
             if (this.filaAterrissagem1.verificarTemAviaoComPoucoCombustivel() > 0){
                 this.filaAterrissagem1.colocarAviaoFrente();
@@ -281,4 +289,5 @@ public class Aeroporto {
         System.out.println();
 
     }
+
 }
