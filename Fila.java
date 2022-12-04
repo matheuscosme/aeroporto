@@ -61,7 +61,6 @@ public class Fila {
                     + " Tempo de Espera: " + auxiliar.aviao.tempoEspera);
             auxiliar = auxiliar.proximoNo;
         }
-        System.out.println();
     }
 
     public int verificarTemAviaoComPoucoCombustivel() {
