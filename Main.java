@@ -3,6 +3,8 @@ public class Main {
         Aeroporto aeroporto = new Aeroporto();
         aeroporto.passarTempo();
         aeroporto.passarTempo();
+        aeroporto.passarTempo();
+
     
     }
 }

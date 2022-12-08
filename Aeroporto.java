@@ -128,7 +128,6 @@ public class Aeroporto {
             this.filaAterrissagem1.colocarAviaoFrente();
             for (int i = 0; i < avioesPoucoCombustivelFila1; i++){
                 this.avioesAterrissagem.add(this.filaAterrissagem1.removerInicio());
-                System.out.println("add");
             }
         }
         if (avioesPoucoCombustivelFila2 > 0){
@@ -184,7 +183,7 @@ public class Aeroporto {
         } 
 
         if (this.pista2.getLivre()){
-            if (this.filaAterrissagem1.quantidadeAvioes > 0 || this.filaAterrissagem2.quantidadeAvioes > 0) {
+            if (this.filaAterrissagem3.quantidadeAvioes > 0 || this.filaAterrissagem4.quantidadeAvioes > 0) {
 
                 if (this.filaAterrissagem3.quantidadeAvioes >= this.filaAterrissagem4.quantidadeAvioes){
                     this.avioesAterrissagem.add(this.filaAterrissagem3.removerInicio());
@@ -217,7 +216,7 @@ public class Aeroporto {
             System.out.print("Tempo de espera médio da decolagem: ");
             System.out.println(this.avioesDecolagem.get(0).aviao.tempoEspera );
         } else {
-            System.out.println("Tempo de espera médio da decolagem: - ");
+            System.out.println("Tempo de espera médio da decolagem: sem decolagens ");
         }
         this.avioesDecolagem.clear();
     }
@@ -228,10 +227,18 @@ public class Aeroporto {
             if (this.avioesAterrissagem.size() == 1){
                 System.out.println(this.avioesAterrissagem.get(0).aviao.tempoEspera );
             } 
-            //FALTA LÓGICA
+            else if (this.avioesAterrissagem.size() == 2) {
+                System.out.println((this.avioesAterrissagem.get(0).aviao.tempoEspera + 
+                this.avioesAterrissagem.get(1).aviao.tempoEspera)/2);
+            }
+            else {
+                System.out.println((this.avioesAterrissagem.get(0).aviao.tempoEspera + 
+                this.avioesAterrissagem.get(1).aviao.tempoEspera +
+                this.avioesAterrissagem.get(2).aviao.tempoEspera)/3);
+            }
             System.out.println();
         } else {
-            System.out.println("Tempo de espera médio da aterrisagem: - ");
+            System.out.println("Tempo de espera médio da aterrisagem: sem aterrissagens ");
         }
         this.avioesAterrissagem.clear();
     }
